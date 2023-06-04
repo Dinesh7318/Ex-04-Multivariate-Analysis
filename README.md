@@ -1,131 +1,98 @@
+https://github.com/Dinesh7318/Ex-04-Multivariate-Analysis
+
+https://colab.research.google.com/drive/1K-FaJkaCXDeq8TQRkMGD-Z9Dvf2kC9IY?usp=sharing
+
 # Ex-04-Multivariate-Analysis
+## Aim
+To perform Multivariate EDA on the given data set.
 
-## AIM:
+## Explanation Exploratory data analysis is used to understand the messages within a dataset. This technique involves many iterative processes to ensure that the cleaned data is further sorted to better understand the useful meaning.The primary aim with exploratory analysis is to examine the data for distribution, outliers and anomalies to direct specific testing of your hypothesis.
 
-   To Perform Multivariate Analysis
-## ALGORITHM:
+## Algorithm
+### Step1
+Import the built libraries required to perform EDA and outlier removal.
 
-1.Read the given data
+### Step2
+Read the given csv file.
 
-2.Get information from the data
+### Step3
+Convert the file into a dataframe and get information of the data.
 
-3.Perform the Multivariate Analysis
+### Step4
+Return the objects containing counts of unique values using (value_counts()).
 
-4.Save the clean data to file
+### Step5
+Plot the counts in the form of Histogram or Bar Graph.
 
-## PROGRAM:
+### Step6
+Use seaborn the bar graph comparison of data can be viewed.
 
-1.reading the file
+### Step7
+Find the pairwise correlation of all columns in the dataframe.corr()
 
+### Step8
+Save the final data set into the file.
+
+## Code
+```
+Developed by : Harihran.M
+Registration Number : 212221230034
+```
+```
 import pandas as pd
-
+import numpy as py
 import seaborn as sns
-
-df=pd.read_csv("/content/SuperStore.csv")
-
-data=df
-
-2.Scatterplot
-
-import pandas as pd
-
-import seaborn as sns
-
 import matplotlib.pyplot as plt
 
-sns.scatterplot (df['Postal Code'],df['Sales'])
+df=pd.read_csv('SuperStore.csv')
+df
+df.head()
+df.info()
+df.describe()
+df.isnull().sum()
+df.dtypes
 
+sns.scatterplot(df['Postal Code'],df['Sales'],hue=df['Row ID'])
 
-3.Barplot
+sns.barplot(x=df['Row ID'],y=df['Sales'],data=df)
 
-import pandas as pd
-
-import seaborn as sns
-
-sns.barplot (x=df["Postal Code"], y=df["Sales"], data=df)
-
-
-
-
-4. Scatterplot
-
-import pandas as pd
-
-import seaborn as sns
-
-sns.scatterplot(df["Postal Code"], y=df["Sales"], hue=df['Row ID'])
-
-
-
-5.
-  df.info()
-  
-
-  
- 6. 
- 
- states=df.loc[:,["Postal Code","Sales"]]
-
-states=states.groupby(by=["Postal Code"]).sum().sort_values(by="Sales")
-
+states=df.loc[:,["State","Sales"]]
+states=states.groupby(by=["State"]).sum().sort_values(by="Sales")
+plt.figure(figsize=(17,7))
 sns.barplot(x=states.index,y="Sales",data=states)
-
 plt.xticks(rotation = 90)
-
-plt.xlabel=("Postal Code")
-
+plt.xlabel=("STATES")
 plt.ylabel=("SALES")
-
 plt.show()
 
+sns.barplot(df['Postal Code'],df['Ship Mode'],hue=df['Region'])
 
+df.corr()
+sns.heatmap(df.corr(),annot=True)
+```
 
-7.
+## Output
+### Data
+![](1.png)
+### Data head 
+![](2.png)
+### Data Information
+![](3.png)
+### Data describe
+![](4.png)
+### Data Null Values
+![](5.png)
+### Data types 
+![](6.png)
+### Scatterplot
+![](8.png)
+### Barplot
+![](9.png)
+![](10.png)
+![](11.png)
+### Correlation and Heatmap
+![](12.png)
+![](13.png)
 
-states=df.loc[:,["Segment","Sales"]]
-
-states=states.groupby(by=["Segment"]).sum().sort_values(by="Sales")
-
-#plt.figure(figsize=(10,7))
-
-sns.barplot(x=states.index,y="Sales",data=states)
-
-plt.xticks(rotation = 90)
-
-plt.xlabel=("Segment")
-
-plt.ylabel=("Sales")
-
-plt.show()
-
-
-
-8.
-
-
-
-## OUTPUT:
-
-![Screenshot (165)](https://user-images.githubusercontent.com/86832944/194208499-d28a7e1b-9e25-4f0e-881a-79af9dd58c30.png)
-![Screenshot (167)](https://user-images.githubusercontent.com/86832944/194209071-a2100cbc-db7d-4229-86ae-a10854bd7b46.png)
-![Screenshot (171)](https://user-images.githubusercontent.com/86832944/194209468-d244fd02-d863-436d-868c-aff2852430ef.png)
-![Screenshot (168)](https://user-images.githubusercontent.com/86832944/194209230-233a9588-6690-4364-be0d-9178ee616727.png)
-![Screenshot (169)](https://user-images.githubusercontent.com/86832944/194209587-2ce61dd3-3a22-4b7f-8faa-ca6b883ffc35.png)
-![Screenshot (172)](https://user-images.githubusercontent.com/86832944/194209698-5e4bf0c6-a315-4309-bf25-5b5de3a714ad.png)
-![Screenshot (173)](https://user-images.githubusercontent.com/86832944/194209735-ff63adcc-3898-4587-bd2c-b6d42045fe30.png)
-
-## RESULT: 
- 
-Thus, Multivariate-Analysis is performed on given data and saved successfully.
-
-
-
-
-
-
-
-
-
-
-
-
+## Result
+Thus the program to perform EDA on the given data set is successfully executed.
